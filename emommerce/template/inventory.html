@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<title>Add Items</title>
+</head>
+<style >
+	
+.container{
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 2%;
+	/* border: 1px solid black; */
+	border: 3px solid black;
+
+}	
+
+.form_acc{
+	margin-top: 5%;
+	margin-left: 25%;
+}
+.form_acc label{
+
+	font-size: 1.2em;
+	padding-bottom: 2%;
+	font-family: courier;
+}
+
+.form_acc input{
+
+	width: 65%;
+	padding: 1.3%;
+}
+.form_acc #submit{
+
+	width: 69%;
+	background-color: black;
+	color: white;
+	margin-top: 3%;
+	padding: 2.3%;
+	text-align: center;
+	font-size: 1.1em;
+}
+
+ #login_return {
+ 	color: black;
+ 	font-size: 1.2em;
+	margin-left:30% ;
+
+}
+
+	#navbarSupportedContent{
+		
+		margin-left:2% ;
+		font-size: 1.2em;
+	}
+.nav-item{
+
+	margin-left: 40%;
+}
+</style>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{%url 'home' %}">MAXIMUM CLOTHING</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{%url 'home' %}">Inventory</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'manage' %}">Manage</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Orders
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Order Summary</a></li>
+            <li><a class="dropdown-item" href="#">Cancel Order</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Search Order</a></li>
+          </ul>
+        </li>
+        
+      </ul>
+
+     <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+
+
+    </div>
+  </div>
+</nav>
+
+
+ 
+
+<div class="container">
+
+	<h1 style="text-align: center;">Add New Item</h1>
+	
+	<form class="form_acc" method="post" action="/administrator/home/" enctype="multipart/form-data">
+    {% csrf_token %}
+  <label >Name</label>
+  <br>
+  <input type="text" id="name" name="name" autofocus>
+  <br><br>
+  <label >Category</label>
+  <br>
+  <input type="text" id="category" name="category">
+  <br><br>
+   <label >Quantity</label>
+  <br>
+  <input type="number" id="number" name="quantity">
+  <br><br>
+  <label>Price</label>
+  <br>
+  <input type="number" id="number" name="price">
+  <br><br>
+   <label>Image</label>
+  <br>
+  <input type="file" name="image">
+  <br><br>
+  <input type="submit" value="Submit" id="submit">
+  <br><br>
+
+</form>
+
+
+</div>
+
+
+
+
+
+
+</body>
+</html>

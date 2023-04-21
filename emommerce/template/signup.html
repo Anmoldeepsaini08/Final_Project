@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Signup</title>
+</head>
+<style >
+	
+.container{
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 8%;
+	/* border: 1px solid black; */
+	
+
+}	
+
+.form_acc{
+	margin-top: 8%;
+	margin-left: 25%;
+}
+.form_acc label{
+
+	font-size: 1.2em;
+	padding-bottom: 2%;
+	font-family: courier;
+}
+
+.form_acc input{
+
+	width: 65%;
+	padding: 1.6%;
+}
+.form_acc #submit{
+
+	width: 69%;
+	background-color: black;
+	color: white;
+	margin-top: 3%;
+	padding: 2.3%;
+	text-align: center;
+	font-size: 1.1em;
+}
+
+ #login_return {
+ 	color: black;
+ 	font-size: 1.2em;
+	margin-left:30% ;
+
+}
+</style>
+<body>
+
+<div class="container">
+
+	<h1 style="text-align: center;">CREATE ACCOUNT</h1>
+	
+	<form class="form_acc" method="post" action="signup">{% csrf_token %}
+  <label for="fname">NAME</label>
+  <br>
+  <input type="text" id="fname" name="name" autofocus>
+  <br><br>
+  <label for="number">Phone Number</label>
+  <br>
+  <input type="text" id="number" name="p_number">
+  <br><br>
+   
+   <label for="email">EMAIL</label>
+  <br>
+  <input type="Email" id="name" name="email">
+  <br><br>
+  <label for="lname">PASSWORD</label>
+  <br>
+  <input type="Password" id="pass" name="password">
+  <br><br>
+  <input type="submit" value="Submit" id="submit">
+  <br><br>
+  <a href="{% url 'login' %}" id="login_return">Login</a> 
+</form>
+
+
+</div>
+
+
+
+
+
+
+</body>
+</html>
