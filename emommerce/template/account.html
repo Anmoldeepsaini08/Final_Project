@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<title>Maximum Clothing</title>
+</head>
+<style >
+	
+.container{
+	width: 100%;
+	
+
+	/* border: 1px solid black; */
+	border: 3px solid black;
+
+}	
+
+
+
+
+
+
+
+
+
+main{
+   
+   height: 100vh;
+   display:flex;
+   justify-content: center;
+
+   align-items: center;
+   
+}
+.form{
+   max-width: 700px;
+  margin-bottom: 20%;
+  display: inline-block;
+   width: 100%;
+   background: white;
+
+   border-radius: 5px;
+
+
+}
+.form .title{
+   font-size: 25px;
+   font-weight: 500;
+   position: relative;
+}
+.form .title::before{
+  
+   position: absolute;
+   left: 0;
+
+   height: 3px;
+   width: 30px;
+   background:linear-gradient(135deg, #28a745) ;
+}
+.form form .user-details{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   margin: 0;
+}
+form .user-details .input-box{
+   margin-bottom: 15px;
+   width: calc(100% / 2 - 20px);
+}
+.user-details .input-box .details{
+   display: block;
+   font-weight: 500;
+   margin-bottom: 5px;
+}
+.user-details .input-box input{
+   height: 45px;
+   width: 100%;
+   outline: none;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+   padding-left: 15px;
+   font-size: 16px;
+   border-bottom-width: 2px;
+   transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+   border-color:black;
+}
+
+#dot-1:checked ~ .category  label  .one,
+#dot-2:checked ~ .category  label  .two,
+#dot-3:checked ~ .category  label  .three{
+   border-color: #d9d9d9;
+   background: #2a5298;
+}
+#dot-1 {
+   display: none;
+}
+#dot-2{
+   display: none;
+}
+#dot-3 {
+   display: none;
+}
+
+#button{
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 1%;
+  margin-top: 4%;
+  font-size: 1.4em;
+}
+@media (max-width : 584px){
+   .form{
+       max-width: 100%;
+   }
+   form .user-details .input-box{
+       margin-bottom: 15px;
+       width: 100%;
+   }
+
+}
+
+
+
+
+
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{%url 'home' %}"><b>Maximum Clothing</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{%url 'home' %}">Home <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'order' %}">Orders</a>
+            </li>
+        
+            <li class="nav-item">
+              <a class="nav-link " href="{%url 'cart' %}">Cart</a>
+            </li>
+           
+           
+      
+        </ul>
+        <span class="navbar-text" style="margin-right: 2%;float: right;">
+         
+          <li class="nav-item dropdown" style="list-style-type: none;">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="float: right;">
+             <b> Welcome:</b> {{user_id}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: 17%;width: 75%;margin-left: 20%;">
+      
+              <li><a class="dropdown-item" href="{% url 'account' %}">Account</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{%url 'cart' %}">Cart</a></li>
+      
+              <li><a class="dropdown-item" href="#">Orders</a></li>
+              <li><a class="dropdown-item" href="#">Wishlist</a></li>
+      
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#"><form method='post' action='signout'>{% csrf_token %}
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Signout</button>
+              </form></a></li>
+            </ul>
+          </li>
+        </span>
+      
+          
+         
+        </div>
+      </nav>
+
+
+ 
+
+
+
+	<h1 style="text-align: center;margin-top: 3%;">Hi, {{user_name}}</h1>
+  <main>
+    <div class="form"> 
+       
+    <form action="account" method="post"  > 
+        {% csrf_token %}
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Name </span>
+                <input type="text" value="{{user_name}}" name='name' required>
+            </div>
+            <div class="input-box">
+                <span class="details">Email </span>
+                <input type="text" value="{{user_id}}" name='email' required>
+            </div>
+            <div class="input-box">
+                <span class="details">Phone Number </span>
+                <input type="number" value="{{user_phone}}" name="p_num" required>
+            </div>
+
+        
+            <div class="input-box">
+                <span class="details">Address </span>
+                <input type="text" value="{{address}}" name="address" required >
+            </div>
+         
+            <div class="input-box">
+              <span class="details">Pin Code </span>
+              <input type="number" value="{{user_pincode}}" name="pin_code" required>
+          </div>
+           
+           </div>
+          
+      
+           <div class="button">
+               <button type="submit" value="{{user_id}}" name="account-btn" id="button">Save</button>      
+              
+              </div>
+    </form>
+    </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

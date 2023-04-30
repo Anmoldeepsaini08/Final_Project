@@ -25,6 +25,25 @@ class Cart(models.Model):
     user_email = models.CharField(max_length=20)
     user_item = models.CharField(max_length=20) 
     item_quantity = models.IntegerField(default=1)
+    item_size = models.CharField(max_length=9,default='Small') 
+
+class Address(models.Model):
+
+    user_email= models.CharField(max_length=20)
+    user_address = models.CharField(max_length=70,default='N/A')
+    user_pincode  = models.IntegerField(default=000000)
+
+
+class Orders(models.Model):
+
+    order_number = models.AutoField
+    user_email = models.CharField(max_length=20)
+    user_item = models.CharField(max_length=20) 
+    item_quantity = models.IntegerField(default=1)
+    item_size = models.CharField(max_length=9) 
+    date =  models.CharField(max_length=20) 
+    user_total = models.IntegerField()
+
 
 
 

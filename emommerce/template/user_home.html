@@ -18,12 +18,12 @@
 
 .card_user {
 margin-left: 10%;
- width: 20%;
- height: 270px;
+ width: 22%;
+ height: 240px;
  padding: .8em;
  background: #f5f5f5;
  position: relative;
-margin-bottom: 15%;
+margin-bottom: 18%;
  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
@@ -86,10 +86,70 @@ svg {
  background-color: #ffcaa6;
 }
 
+
+
+
+.btn_like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  float: right;
+  margin-right: 5%;
+}
+
+.btn_like::after {
+
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  font-size: 15px;
+  color: black;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s linear;
+  top: 115%;
+}
+
+.icon {
+  width: 25px;
+  height: 30px;
+  transition: .2s linear;
+}
+
+.icon path {
+  fill: rgb(33, 32, 32);
+  transition: .2s linear;
+}
+
+.btn_like:hover > .icon {
+  transform: scale(1.2);
+}
+
+.btn_like:hover > .icon path {
+  fill: rgb(211, 26, 26);
+}
+
+.btn_like:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: 105%;
+}
+
+
+
+
+
 </style>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Maximum Clothing</a>
+  <a class="navbar-brand" href="{%url 'home' %}"><b>Maximum Clothing</b></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -100,22 +160,40 @@ svg {
         <a class="nav-link" href="{%url 'home' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Orders</a>
+        <a class="nav-link" href="{%url 'order' %}">Orders</a>
       </li>
   
       <li class="nav-item">
         <a class="nav-link " href="{%url 'cart' %}">Cart</a>
       </li>
      
-    
+     
+
   </ul>
   <span class="navbar-text" style="margin-right: 2%;float: right;">
-    User Id: {{user_id}}
+   
+    <li class="nav-item dropdown" style="list-style-type: none;">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="float: right;">
+       <b> Welcome:</b> {{user_id}}
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: 17%;width: 75%;margin-left: 20%;">
+
+        <li><a class="dropdown-item" href="{%url 'account'%}">Account</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="{%url 'cart' %}">Cart</a></li>
+
+        <li><a class="dropdown-item" href="#">Orders</a></li>
+        <li><a class="dropdown-item" href="#">Wishlist</a></li>
+
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#"><form method='post' action='signout'>{% csrf_token %}
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Signout</button>
+        </form></a></li>
+      </ul>
+    </li>
   </span>
 
-    <form method='post' action='signout'>{% csrf_token %}
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Signout</button>
-    </form>
+    
    
   </div>
 </nav>
@@ -128,7 +206,13 @@ svg {
 <div class="card_user">
     <div class="card-img">    <img src=" /media/{{i.image}} " class="card-img img-fluid"  alt="image"> </div>
     <div class="card-info">
+      
       <p class="text-title">{{i.name}} </p>
+      <button class="btn_like" name="like-button" value="{{i.name}}">
+        <svg viewBox="0 0 17.503 15.625" height="20.625" width="20.503" xmlns="http://www.w3.org/2000/svg" class="icon">
+          <path transform="translate(0 0)" d="M8.752,15.625h0L1.383,8.162a4.824,4.824,0,0,1,0-6.762,4.679,4.679,0,0,1,6.674,0l.694.7.694-.7a4.678,4.678,0,0,1,6.675,0,4.825,4.825,0,0,1,0,6.762L8.752,15.624ZM4.72,1.25A3.442,3.442,0,0,0,2.277,2.275a3.562,3.562,0,0,0,0,5l6.475,6.556,6.475-6.556a3.563,3.563,0,0,0,0-5A3.443,3.443,0,0,0,12.786,1.25h-.01a3.415,3.415,0,0,0-2.443,1.038L8.752,3.9,7.164,2.275A3.442,3.442,0,0,0,4.72,1.25Z" id="Fill"></path>
+        </svg>
+      </button>
       <p class="text-body">{{i.category}}</p>
     </div>
     <div class="card-footer">
@@ -144,7 +228,11 @@ svg {
         <path d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"></path>
       </svg>
     </div>
+
+    
   </button>
+
+
   </form>
   </div>
 
