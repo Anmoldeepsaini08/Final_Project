@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+	<meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cart</title>
+</head>
+<style>
+
+
+
+table {
+	margin-top: 2%;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  
+}
+
+td, th {
+  border: 2px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.btn {
+  background-color: transparent;
+  position: relative;
+  border: none;
+}
+
+.btn::after {
+ 
+  position: absolute;
+  top: -130%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  height: fit-content;
+  background-color: rgb(168, 7, 7);
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: .2s linear;
+  transition-delay: .2s;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.icon {
+  transform: scale(1.2);
+  transition: .2s linear;
+}
+
+.btn:hover > .icon {
+  transform: scale(1.5);
+}
+
+.btn:hover > .icon path {
+  fill: rgb(168, 7, 7);
+}
+
+.btn:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: -160%;
+}
+
+.icon {
+  width: 25px;
+  height: 30px;
+  transition: .2s linear;
+}
+
+.card_user {
+margin-left: 10%;
+ width: 22%;
+ height: 240px;
+ padding: .8em;
+ background: #f5f5f5;
+ position: relative;
+margin-bottom: 18%;
+ box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.card-img {
+
+ height: 100%;
+ width: 100%;
+ border-radius: .5rem;
+ transition: .3s ease;
+}
+
+.card-info {
+ padding-top: 10%;
+}
+
+svg {
+ width: 20px;
+ height: 20px;
+}
+
+.card-footer {
+ width: 100%;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding-top: 10px;
+ border-top: 1px solid #ddd;
+}
+
+/*Text*/
+.text-title {
+ font-weight: 900;
+ font-size: 1.2em;
+ line-height: 1.5;
+}
+
+.text-body {
+ font-size: .9em;
+ padding-bottom: 10px;
+}
+
+/*Button*/
+.card-button {
+ border: 1px solid #252525;
+ display: flex;
+ padding: .3em;
+ cursor: pointer;
+ border-radius: 50px;
+ transition: .3s ease-in-out;
+}
+
+/*Hover*/
+.card-img:hover {
+ transform: translateY(-3%);
+ box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
+}
+
+.card-button:hover {
+ border: 1px solid #ffcaa6;
+ background-color: #ffcaa6;
+}
+
+
+
+
+.btn_like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  float: right;
+  margin-right: 5%;
+}
+
+.btn_like::after {
+
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  font-size: 15px;
+  color: black;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s linear;
+  top: 115%;
+}
+
+.icon {
+  width: 25px;
+  height: 30px;
+  transition: .2s linear;
+}
+
+.icon path {
+  fill: rgb(33, 32, 32);
+  transition: .2s linear;
+}
+
+.btn_like:hover > .icon {
+  transform: scale(1.2);
+}
+
+.btn_like:hover > .icon path {
+  fill: rgb(211, 26, 26);
+}
+
+.btn_like:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: 105%;
+}
+
+
+
+</style>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{%url 'home' %}"><b>Maximum Clothing</b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{%url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'order' %}">Orders</a>
+        </li>
+    
+        <li class="nav-item">
+          <a class="nav-link " href="{%url 'cart' %}">Cart</a>
+        </li>
+       
+       
+  
+    </ul>
+    <span class="navbar-text" style="margin-right: 2%;float: right;">
+     
+      <li class="nav-item dropdown" style="list-style-type: none;">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="float: right;">
+         <b> Welcome:</b> {{user_id}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin-top: 17%;width: 75%;margin-left: 20%;">
+  
+          <li><a class="dropdown-item" href="{%url 'account'%}">Account</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="{%url 'cart' %}">Cart</a></li>
+  
+          <li><a class="dropdown-item" href="{%url 'order' %}">Orders</a></li>
+          <li><a class="dropdown-item" href="{%url 'wishlist' %}">Wishlist</a></li>
+  
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#"><form method='post' action='signout'>{% csrf_token %}
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Signout</button>
+          </form></a></li>
+        </ul>
+      </li>
+    </span>
+  
+      
+     
+    </div>
+  </nav>
+
+
+<div class="container" >
+   <div class="border rounded p-4 m-4">
+        <p class="display-4 pl-4 ml-4">Your Wishlist</p>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sno.</th>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Delete</th>
+                    <th>Cart</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for image,product,price in wish %}
+                <tr>
+                
+                    <td>{{forloop.counter}}</td>
+                    <td><img style="height: 80px;"  src="/media/{{image}}" alt=""></td>
+                    <td><input type="text" value="{{product}}" name="p_name" style="display: none;">{{product}}</td>
+                    <td>Rs. {{price}}.00</td>
+                 
+                    
+                    <td>
+
+                      <form action="wishlist" method="post" >    {% csrf_token %}
+                        <button class="btn" name="delete-button" value="{{product}}" type="submit">
+                          <svg viewBox="0 0 15 17.5" height="12.5" width="15" xmlns="http://www.w3.org/2000/svg" class="icon">
+                          <path transform="translate(-2.5 -1.25)" d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z" id="Fill"></path>
+                        </svg>
+                        </button>
+
+
+                          </form>
+
+
+                                </td>
+                                <td>
+
+
+                          <form method="post" action="wishlist">
+                            {% csrf_token %}
+                            <button type="submit" value="{{product}}" name='to_cart' style="border: none;background-color: inherit;">
+                          <div class="card-button"    >
+                       
+                            <svg class="svg-icon" viewBox="0 0 20 20"  >
+                              <path d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z"></path>
+                              <path d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z"></path>
+                              <path d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"></path>
+                            </svg>
+                          </div>
+                      
+                          
+                        </button>
+                      
+                      
+                        </form>
+                    </td>
+                  
+                </tr>
+
+                {% endfor %}
+               
+            </tbody>
+
+            
+        </table>
+        <hr>
+   
+   </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

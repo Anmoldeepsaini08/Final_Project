@@ -114,8 +114,8 @@ td, th {
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="{%url 'cart' %}">Cart</a></li>
   
-          <li><a class="dropdown-item" href="#">Orders</a></li>
-          <li><a class="dropdown-item" href="#">Wishlist</a></li>
+          <li><a class="dropdown-item" href="{%url 'order' %}">Orders</a></li>
+          <li><a class="dropdown-item" href="{%url 'wishlist' %}">Wishlist</a></li>
   
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="#"><form method='post' action='signout'>{% csrf_token %}
