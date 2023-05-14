@@ -223,8 +223,8 @@ button:hover svg {
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="{%url 'cart' %}">Cart</a></li>
   
-          <li><a class="dropdown-item" href="#">Orders</a></li>
-          <li><a class="dropdown-item" href="#">Wishlist</a></li>
+          <li><a class="dropdown-item" href="{%url 'order' %}">Orders</a></li>
+          <li><a class="dropdown-item" href="{%url 'wishlist' %}">Wishlist</a></li>
   
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="#"><form method='post' action='signout'>{% csrf_token %}
@@ -270,7 +270,7 @@ button:hover svg {
 
                                 <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px;float: left; vertical-align: top; text-align: right;">
                                     <small>{{user_id}}<br />
-                                    <small>Date: </small>
+                                   <!--- <small>Date: </small> -->
 
                                      <td style="font-size: 21px; color: #ff0000; letter-spacing: -1px; font-family: 'Open Sans', sans-serif; line-height: 1; vertical-align: top; text-align: right;">
                                   Invoice
@@ -307,7 +307,7 @@ button:hover svg {
                                     <tbody>
                                       <tr>
                                         <td style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                          <strong>BILLING INFORMATION</strong>
+                                          <strong>Billing and Shipping Information</strong>
                                         </td>
                                       </tr>
                                       <tr>
@@ -315,7 +315,11 @@ button:hover svg {
                                       </tr>
                                       <tr>
                                         <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                          Philip Brooks<br> Public Wales, Somewhere<br> New York NY<br> 4468, United States<br> T: 202-555-0133
+                                         {{name}}<br>
+                                         <br>
+                                          {{address_bill}} 
+                                          <br> Pincode: {{pin}}<br>
+                                          Phone Number: {{call}}
                                         </td>
                                       </tr>
 

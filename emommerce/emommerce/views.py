@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from administrator.models import Items,users,Cart,Address,Orders
+from administrator.models import Items,users,Cart,Address,Orders,Wishlist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 import datetime
@@ -45,22 +45,118 @@ def home(request):
     current_user = request.session['id']
 
     if request.method == 'POST' :
-        item_name = request.POST.get('item_name')
-        
-        cart_item = Cart()
 
-       # print(item_name,current_user)
-        cart_item.user_email = current_user
-        cart_item.user_item = item_name
+        if 'like-button' in request.POST:
+            item_name = request.POST.get('like-button')
 
-        cart_item.save()
+            wish = Wishlist()
+
+            #print(current_user,item_name)
+            wish.user_email  = current_user
+            wish.user_item = item_name
+            wish.save()
+
+     
+
+        else:
+
+            item_name = request.POST.get('item_name')
+            
+            cart_item = Cart()
+
+        # print(item_name,current_user)
+            cart_item.user_email = current_user
+            cart_item.user_item = item_name
+
+            cart_item.save()
 
         return redirect('home')
     
 
     items = Items.objects.all()
-    return render(request,'user_home.html',{'items':items,'user_id':current_user})
+    items = items[:4]
 
+    items_2 = Items.objects.all()
+    items_2 = items_2
+
+    return render(request,'user_home.html',{'items':items,'user_id':current_user,'items_2':items_2})
+
+def mens(request):
+
+    current_user = request.session['id']
+
+    if request.method == 'POST' :
+
+        if 'like-button' in request.POST:
+            item_name = request.POST.get('like-button')
+
+            wish = Wishlist()
+
+            #print(current_user,item_name)
+            wish.user_email  = current_user
+            wish.user_item = item_name
+            wish.save()
+
+     
+
+        else:
+
+            item_name = request.POST.get('item_name')
+            
+            cart_item = Cart()
+
+        # print(item_name,current_user)
+            cart_item.user_email = current_user
+            cart_item.user_item = item_name
+
+            cart_item.save()
+
+        return redirect('mens')
+
+    items = Items.objects.all()
+    items = items
+
+
+    return render(request,'mens.html',{'items':items,'user_id':current_user})
+
+
+def women(request):
+
+    current_user = request.session['id']
+
+    if request.method == 'POST' :
+
+        if 'like-button' in request.POST:
+            item_name = request.POST.get('like-button')
+
+            wish = Wishlist()
+
+            #print(current_user,item_name)
+            wish.user_email  = current_user
+            wish.user_item = item_name
+            wish.save()
+
+     
+
+        else:
+
+            item_name = request.POST.get('item_name')
+            
+            cart_item = Cart()
+
+        # print(item_name,current_user)
+            cart_item.user_email = current_user
+            cart_item.user_item = item_name
+
+            cart_item.save()
+
+        return redirect('mens')
+
+    items = Items.objects.all()
+    items = items
+
+
+    return render(request,'women.html',{'items':items,'user_id':current_user})
 
 def cart(request):
 
@@ -268,7 +364,11 @@ def checkout(request):
     Total_value = 0
     
     size_arr = []
+    address = ''
+    pincode = 0
+    phone_number = 0
 
+    name = ''
 
     current_user = request.session['id']
     if Address.objects.filter(user_email = current_user).values('user_address')[0].get('user_address') == '':
@@ -277,6 +377,13 @@ def checkout(request):
     else:
 
         try:
+            # for address
+            name = users.objects.filter(user_email = current_user).values('user_name')[0].get('user_name')
+            address = Address.objects.filter(user_email = current_user).values('user_address')[0].get('user_address')
+            pincode = Address.objects.filter(user_email = current_user).values('user_pincode')[0].get('user_pincode')
+            phone_number = users.objects.filter(user_email = current_user).values('user_phone')[0].get('user_phone')
+
+            # for items
             for i in Cart.objects.filter(user_email = current_user).values('user_item'):
                     item_name = i.get('user_item')
                     items = Items.objects.filter(name = item_name)
@@ -306,7 +413,7 @@ def checkout(request):
 
         #user_address = Address.objects.filter(user_email = current_user).values('user_address')[0].get('user_address')
 
-        return render(request,'checkout.html',{'products':collected,'Total':Total_value,'user_id':current_user})
+        return render(request,'checkout.html',{'products':collected,'Total':Total_value,'user_id':current_user,'address_bill':address,'pin':pincode,'call':phone_number,'name':name})
 
 
 def payment(request):
@@ -413,6 +520,88 @@ def order(request):
 
 
     return render(request,'order.html',{'user_id':current_user,'products':collected})
+
+
+
+
+
+
+
+
+def wishlist(request):
+
+    
+    current_user = request.session['id']
+
+    collected = ''
+    
+    items_arr = []
+    price_arr = []
+    item_total = []
+    image = []
+    total_item = 0
+  
+#    print(Wishlist.objects.filter(user_email = current_user).values('user_item')[0].get('user_item'))
+
+
+
+    if 'delete-button' in request.POST:
+            
+        delete_item = request.POST.get('delete-button')
+            #print(delete_item)
+
+        Wishlist.objects.filter(user_item = delete_item).delete()
+
+        return redirect('wishlist')
+
+            
+    elif 'to_cart' in request.POST:
+        item_name = request.POST.get('to_cart')
+            
+        cart_item = Cart()
+
+        # print(item_name,current_user)
+        cart_item.user_email = current_user
+        cart_item.user_item = item_name
+
+        cart_item.save()
+
+    #    print(Wishlist.objects.filter(user_email = current_user).values('user_item'))
+    for i in Wishlist.objects.filter(user_email = current_user).values('user_item'):
+        item_name = i.get('user_item')
+       # print(Items.objects.filter(name = item_name))
+        if not Items.objects.filter(name = item_name):
+            continue
+        else:
+
+            items = Items.objects.filter(name = item_name)
+           # print(items)
+            
+            
+            price = items.values('price')[0]
+            price = price.get('price')
+
+                
+            price_arr.append(price)
+            items_arr.append(item_name)
+            item_total.append(total_item)
+            image.append(items.values('image')[0].get('image'))
+                        #print(items.values('image')[0].get('image'))
+            collected = zip(image,items_arr,price_arr)
+                        
+           
+       
+        
+
+        
+        
+    return render(request,'wishlist.html',{'wish':collected,'user_id':current_user}) 
+
+    
+
+
+                
+    
 def signout(request):
     if request.method == 'POST':
         logout(request)

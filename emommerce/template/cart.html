@@ -76,6 +76,41 @@ td, th {
 }
 
 
+
+
+
+.collapsible {
+ 
+  
+  cursor: pointer;
+  padding: 18px;
+  width: 70%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  margin-left: 15%;
+  margin-top: 4%;
+
+}
+
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+ .collapsible:hover {
+  background-color: white;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 15px;
+  display: none;
+  width: 75%;
+  margin-left: 15%;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+
 </style>
 
 <body>
@@ -89,7 +124,7 @@ td, th {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="{%url 'home' %}">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{%url 'home' %}" >Home </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{%url 'order' %}">Orders</a>
@@ -114,8 +149,8 @@ td, th {
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="{%url 'cart' %}">Cart</a></li>
   
-          <li><a class="dropdown-item" href="#">Orders</a></li>
-          <li><a class="dropdown-item" href="#">Wishlist</a></li>
+          <li><a class="dropdown-item" href="{%url 'order' %}">Orders</a></li>
+          <li><a class="dropdown-item" href="{%url 'wishlist' %}">Wishlist</a></li>
   
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="#"><form method='post' action='signout'>{% csrf_token %}
@@ -129,6 +164,41 @@ td, th {
      
     </div>
   </nav>
+
+  <button type="button" class="collapsible">Size Chart</button>
+  <div class="content">
+    <table >
+      <h2>For Jeans</h2>
+      <tr>
+        <th>Size </th>
+        <th>Waist Size</th>
+        
+      </tr>
+      <tr>
+        <td>Small</td>
+        <td>30</td>
+      
+      </tr>
+
+      <tr>
+        <td>Medium</td>
+        <td>32</td>
+      
+      </tr>
+
+      <tr>
+        <td>Large</td>
+        <td>34</td>
+      
+      </tr>
+
+      <tr>
+        <td>X-Large</td>
+        <td>36</td>
+      
+      </tr>
+      </table>
+  </div>
 
 
 <div class="container" >
@@ -159,7 +229,8 @@ td, th {
                     <td><input type="number" value="{{quantity}}"  style="width: 35%;" name="quantity_change">  <button  type="submit" value="{{product}}" name="submit_item">Confirm</button></td>
                     <td>
                       <form action="cart" method="post" >    {% csrf_token %}
-                        
+                     
+
                       <select name="sizes" id="sizes" style="width: 50%;" >
                         {% if size == 'Small' %}
                         <option value="Small">S</option>
@@ -178,7 +249,7 @@ td, th {
                         <option value="Large">L</option>
                        
                         <option value="X-Large">XL</option>
-                        
+                     
                       </select>
                       <button  type="submit" value="{{product}}" name="size-btn">Confirm</button>
                       </form>
@@ -239,5 +310,21 @@ td, th {
 
 
 </body>
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
 </html>
 

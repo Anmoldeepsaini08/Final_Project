@@ -25,7 +25,7 @@ class Cart(models.Model):
     user_email = models.CharField(max_length=20)
     user_item = models.CharField(max_length=20) 
     item_quantity = models.IntegerField(default=1)
-    item_size = models.CharField(max_length=9,default='Small') 
+    item_size = models.CharField(max_length=9) 
 
 class Address(models.Model):
 
@@ -44,6 +44,10 @@ class Orders(models.Model):
     date =  models.CharField(max_length=20) 
     user_total = models.IntegerField()
 
+class Wishlist(models.Model):
+
+    user_email = models.CharField(max_length=20)
+    user_item = models.CharField(max_length=20)
 
 
 

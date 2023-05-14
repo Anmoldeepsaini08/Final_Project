@@ -8,7 +8,7 @@ def index(request):
         passw = request.POST.get('pass')
 
         if email == 'admin@gmail.com' and passw == 'admin':
-            return redirect('home')
+            return redirect('inventory')
     
     return render(request,'login.html')
  
